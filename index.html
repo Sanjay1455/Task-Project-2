@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-Do List App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📝 To-Do List</h1>
+    <div class="input-section">
+      <input type="text" id="task-input" placeholder="Enter your task" />
+      <button id="add-btn">Add</button>
+    </div>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script >
+    const addBtn = document.getElementById('add-btn');
+const taskInput = document.getElementById('task-input');
+const taskList = document.getElementById('task-list');
+
+// Add Task
+addBtn.addEventListener('click', () => {
+  const taskText = taskInput.value.trim();
+  if (taskText === '') {
+    alert('Please enter a task!');
+    return;
+  }
+
+  const li = document.createElement('li');
+  li.className = 'task-item';
+
+  const span = document.createElement('span');
+  span.className = 'task-text';
+  span.textContent = taskText;
+
+  const removeBtn = document.createElement('button');
+  removeBtn.textContent = 'Remove';
+  removeBtn.className = 'remove-btn';
+
+  // Toggle complete
+  span.addEventListener('click', () => {
+    li.classList.toggle('completed');
+  });
+
+  // Remove task
+  removeBtn.addEventListener('click', () => {
+    li.remove();
+  });
+
+  li.appendChild(span);
+  li.appendChild(removeBtn);
+  taskList.appendChild(li);
+
+  taskInput.value = '';
+});
+</script>
+
+
+
+</body>
+</html>
